@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Секундомеры</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1 class="visually-hidden">Секундомеры</h1>
+  <div class="timer" id="app">
+    <div class="timer__container">
+      <div class="timer__list">
+        <div class="timer__item" v-for="task in tasks">
+          <p class="timer__time">
+            <span id="seconds">00</span>:<span id="tens">00</span>
+          </p>
+          <div class="timer__btn">
+            <div class="box" id="button-start">
+              <label class="play-button">
+                <input type="checkbox">
+                <span></span>
+              </label>
+            </div>
+            <button class="timer__clean" id="button-reset"></button>
+          </div>
+        </div>
+        <div class="timer__item timer__new">
+          <a class="timer__new-btn" @click="tasks.push(message)"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  <script src="js/vue.js"></script>
+  <script src="js/timer.js"></script>
+</body>
+</html>
