@@ -41,13 +41,9 @@ body {
 }
 
 :root {
+  --white: #FFFFFF;
   --white-gray:#9E9E9E;
   --grey: #353638;
-}
-
-.flex {
-  display: flex;
-  flex-direction: row;
 }
   
 .visually-hidden {
@@ -59,6 +55,22 @@ body {
   height: 1px;
   clip: rect(0, 0, 0, 0);  
   overflow: hidden;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.list-reset {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
 }
 
 .timer {
@@ -73,121 +85,67 @@ body {
 }
 
 .timer__list {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: 45px;
+  grid-column-gap: 50px;
+  grid-row-gap: 45px;
 }
 
 .timer__item {
+  -ms-grid-column-span: 4;
   grid-column: span 4;
-  margin-bottom: 45px;
   padding-top: 22px;
   width: 225px;
+  height: 120px;
   background-color: #696969;
 }
 
-.timer__item:not(:last-child) {
-  margin-right: 50px;
+.timer__new {
+  padding: 0;
 }
 
 .timer__time {
   text-align: center;
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .timer__btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   border-top: 1px solid var(--white-gray);
   padding: 20px 70px;
 }
 
 .timer__play {
-  border-style: solid;
-  box-sizing: border-box;
-  width: 17px;
-  height: 20px;
-  margin-right: 48px;
-  border-width: 6px 0 6px 10px;
-  border-color: transparent #9E9E9E;
-  background: none;
-  cursor: pointer;
-}
-
-
-
-
-
-
-.play-button {
   display: block;
-  position: relative;
-  width: 80px;
-  height: 80px;
+  color: var(--white-gray);
+}
+
+.timer__pause {
+  display: none;
+  color: var(--white-gray);
+}
+
+.timer__subbtn {
+  border: 0;
+  margin-right: 45px;
+  padding: 0;
+  background: transparent;
   cursor: pointer;
 }
 
-.play-button input[type=checkbox] {
+.timer__subbtn.timer__btn-toggle .timer__play {
   display: none;
 }
 
-.play-button input[type=checkbox]:checked ~ span::before,
-.play-button input[type=checkbox]:checked ~ span::after {
-  border: 20px solid transparent;
-  border-left: 40px solid #9E9E9E;
-  border-right: 0;
-}
-
-.play-button input[type=checkbox]:checked ~ span::after {
-  transform: translateY(-50%) scaleY(0.5);
-}
-
-.play-button span {
+.timer__subbtn.timer__btn-toggle .timer__pause {
   display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  width: 40px;
-  height: 40px;
+  color: var(--white);
 }
-
-.play-button span::before,
-.play-button span::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 100%;
-  border: 0 solid transparent;
-  border-left: 16px solid #9E9E9E;
-  transition: all 0.4s ease;
-}
-
-.play-button span::before {
-  left: 0;
-}
-
-.play-button span::after {
-  right: 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .timer__clean {
   width: 20px;
@@ -197,14 +155,18 @@ body {
   cursor: pointer;
 }
 
+.timer__subbtn.timer__btn-toggle .timer__clean {
+  color: var(--white);
+}
+
 .timer__new {
-  position: relative;
-  padding: 50px 110px;
+  padding-top: 40px;
+  padding-left: 103px;
 }
 
 .timer__new-btn {
-  position: relative;
   border: none;
+  padding: 0;
   background: none;
   cursor: pointer;
 }
@@ -215,26 +177,46 @@ body {
   position: absolute;
   width: 20px;
   height: 3px;
-  background: #9E9E9E;
+  background-color: var(--white-gray);
 }
 
 .timer__new-btn:before {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 
-.list {
-  padding: 20px;
-  margin: 20px 0;
+@media (max-width: 900px) {
+  .timer {
+    padding-bottom: 72px;
+  }
+  
+  .timer__container {
+    max-width: 500px;
+  }
+
+  .timer__list {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .timer__item {
+    -ms-grid-column-span: 3;
+    grid-column: span 3;
+  }
 }
 
-.item {
-  margin: 10px 0;
-}
+@media (max-width: 576px) {
+  .timer {
+    padding-bottom: 77px;
+  }
+  
+  .timer__container {
+    max-width: 225px;
+  }
 
-.done {
-  text-decoration: line-through;
-}
-
-.form {
-  margin: 20px 0;
+  .timer__list {
+    -ms-grid-columns: 1fr 0 1fr 0 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 0;
+  }
 }
